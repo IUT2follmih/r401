@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "R401",
+            "type": "php",
+            "request": "launch",
+            "runtimeArgs": [
+                "-dxdebug.start_with_request=yes",
+                "-dxdebug.client_host=localhost",
+                "-dxdebug.client_port=9003",
+                "-dxdebug.mode=debug",
+                "-S",
+                "localhost:8000",
+                "-t",
+                "."
+            ],
+            "program": "",
+            "cwd": "${workspaceRoot}/public",
+            "port": 9003,
+            "serverReadyAction": {
+                "action": "openExternally"
+            }
+        }
+    ]
+}

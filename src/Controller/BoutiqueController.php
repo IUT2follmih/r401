@@ -18,14 +18,14 @@ class BoutiqueController extends AbstractController
     {
         $categories = $boutique->findAllCategories();
 
-        return $this->render("boutique/index.html.twig", ["categories" => null]);
+        return $this->render("boutique/index.html.twig", ["categories" => $categories]);
     }
 
     #[Route(
         path: '/rayon/{idCategorie}', 
         name: 'app_boutique_rayon'
     )]
-    public function rayon(int $idCategorie){
-        
+    public function rayon(BoutiqueService $boutique, int $idCategorie){
+        return $this->render("boutique/rayon.html.twig", ["categorie" => $boutique->findCategorieById($idCategorie)]);
     }
 }

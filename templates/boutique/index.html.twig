@@ -29,7 +29,7 @@ boutique.index.title
 			{% for categorie in categories %}
 				<div class="col-md-3">
 					<div class="card clickable" onclick="location = '{{ path('app_boutique_rayon', {'idCategorie':categorie.id}) }}'">
-						<img src="/{{ categorie.visuel }}" class="card-img-top" alt="Logo Boutique"/>
+						<img src="{{ asset(categorie.visuel) }}" class="card-img-top" alt="Logo Boutique"/>
 						<div class="card-body">
 							<h2>{{ categorie.libelle }}</h2>
 							<p class="card-text">

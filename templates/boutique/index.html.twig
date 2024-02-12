@@ -7,15 +7,17 @@
 	<div class="card col-md-12">
 		<div class="card-header">
 			<h3>
-				<i class="fas fa-home"></i>
-				Boutique R4.01
+				<i class="fas fa-store"></i>
+				Boutique :
+				{{categories|length}}
+				Rayon(s)
 			</h3>
 		</div>
 
 		<div class="card-body row">
 			{% for categorie in categories %}
 				<div class="col-md-3">
-					<div class="card clickable" onclick="location = '/rayon/{{ categorie.id }}'">
+					<div class="card clickable" onclick="location = '{{ path('app_boutique_rayon', {'idCategorie':categorie.id}) }}'">
 						<img src="/{{ categorie.visuel }}" class="card-img-top" alt="Logo Boutique"/>
 						<div class="card-body">
 							<h2>{{ categorie.libelle }}</h2>

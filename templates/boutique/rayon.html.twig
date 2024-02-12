@@ -15,15 +15,20 @@
 		<div class="card-body row">
 			{% for item in items %}
 				<div class="col-md-3">
-					<div class="card clickable">
-						<div class="card clickable" onclick="location = '/rayon/{{ categorie.id }}'">
-							<img src="/{{ categorie.visuel }}" class="card-img-top" alt="Logo Boutique"/>
-							<div class="card-body">
-								<h2>{{ categorie.libelle }}</h2>
-								<p class="card-text">
-									{{ categorie.texte }}
-								</p>
-							</div>
+					<div class="card clickable" onclick="location = '/rayon/{{ categorie.id }}'">
+						<img src="/{{ item.visuel }}" class="card-img-top" alt="Logo Boutique"/>
+						<div class="card-body">
+							<h2>{{ item.libelle }}</h2>
+							<p class="card-text">
+								{{ item.texte }}
+							</p>
+							<h2>
+								<span class="badge badge-primary">
+									<i class="fas fa-cart-plus">{{item.prix}}
+										€
+									</i>
+								</span>
+							</h2>
 						</div>
 					</div>
 				</div>

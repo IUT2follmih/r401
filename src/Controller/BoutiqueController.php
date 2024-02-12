@@ -10,11 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class BoutiqueController extends AbstractController
 {
     #[Route(
-        path:'/boutique', 
+        path: '/boutique',
         name: 'app_boutique'
     )]
 
-    public function index(BoutiqueService $boutique) : Response
+    public function index(BoutiqueService $boutique): Response
     {
         $categories = $boutique->findAllCategories();
 
@@ -22,10 +22,14 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route(
-        path: '/rayon/{idCategorie}', 
+        path: '/rayon/{idCategorie}',
         name: 'app_boutique_rayon'
     )]
-    public function rayon(BoutiqueService $boutique, int $idCategorie){
-        return $this->render("boutique/rayon.html.twig", ["categorie" => $boutique->findCategorieById($idCategorie)]);
+    public function rayon(BoutiqueService $boutique, int $idCategorie)
+    {
+        return $this->render('boutique/rayon.html.twig', [
+            'items' => $boutique->findProduitsByCategorie($idCategorie),
+            'categorie' => $boutique->findCategorieById($idCategorie),
+        ]);
     }
 }

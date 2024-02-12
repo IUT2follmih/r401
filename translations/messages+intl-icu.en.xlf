@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="foktJuG" resname="default.index.title">
+        <source>default.index.title</source>
+        <target>R4.01 Store</target>
+      </trans-unit>
+      <trans-unit id="iwFDLOg" resname="default.index.nts">
+        <source>default.index.nts</source>
+        <target>Here nothings to sell, it's just to learn...</target>
+      </trans-unit>
+      <trans-unit id="u5Txryw" resname="templates.navbar.home">
+        <source>templates.navbar.home</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="8RFIGPb" resname="templates.navbar.store">
+        <source>templates.navbar.store</source>
+        <target>Store</target>
+      </trans-unit>
+      <trans-unit id="7kCCf6s" resname="boutique.index.boutique">
+        <source>boutique.index.boutique</source>
+        <target>Store</target>
+      </trans-unit>
+      <trans-unit id="b7mpgzk" resname="boutique.index.shelfName">
+        <source>boutique.index.shelfName</source>
+        <target>Shelf</target>
+      </trans-unit>
+      <trans-unit id="F.Pb84Q" resname="boutique.rayon.shelfName">
+        <source>boutique.rayon.shelfName</source>
+        <target>Shelf</target>
+      </trans-unit>
+      <trans-unit id="3DKL_OK" resname="templates.navbar.contact">
+        <source>templates.navbar.contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="GhsJxIL" resname="boutique.index.title">
+        <source>boutique.index.title</source>
+        <target>Shelfs</target>
+      </trans-unit>
+      <trans-unit id="Ji_3tAu" resname="boutique.rayon.header">
+        <source>boutique.rayon.header</source>
+        <target>Shelf</target>
+      </trans-unit>
+      <trans-unit id="txwOeze" resname="boutique.rayon.shelfTitle">
+        <source>boutique.rayon.shelfTitle</source>
+        <target>product(s)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

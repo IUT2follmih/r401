@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BoutiqueController!
+{% block title %}
+	{% trans %}
+	boutique.rayon.header
+	{% endtrans %}
+	{{ categorie.libelle }}
 {% endblock %}
 
 {% block body %}
@@ -8,14 +12,21 @@
 		<div class="card-header">
 			<h3>
 				<i class="fas fa-store"></i>
-                Rayon "{{categorie.libelle}}" : {{items|length}} produit(s)
+				{% trans %}
+				boutique.rayon.shelfName
+				{% endtrans %}
+				"{{categorie.libelle}}" :
+				{{items|length}}
+				{% trans %}
+				boutique.rayon.shelfTitle
+				{% endtrans %}
 			</h3>
 		</div>
 
 		<div class="card-body row">
 			{% for item in items %}
 				<div class="col-md-3">
-					<div class="card clickable" onclick="location = '/rayon/{{ categorie.id }}'">
+					<div class="card clickable" onclick="location = '{{ path('app_boutique_rayon', {'idCategorie':categorie.id}) }}'">
 						<img src="/{{ item.visuel }}" class="card-img-top" alt="Logo Boutique"/>
 						<div class="card-body">
 							<h2>{{ item.libelle }}</h2>

@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BoutiqueController!
+{% block title %}
+{% trans %}
+boutique.index.title
+{% endtrans %}
+
 {% endblock %}
 
 {% block body %}
@@ -8,11 +12,18 @@
 		<div class="card-header">
 			<h3>
 				<i class="fas fa-store"></i>
-				Boutique :
+				{% trans %}
+				boutique.index.boutique
+				{% endtrans %}
+				
 				{{categories|length}}
-				Rayon(s)
+
+				{% trans %}
+				boutique.index.shelfName
+				{% endtrans %}
 			</h3>
 		</div>
+
 
 		<div class="card-body row">
 			{% for categorie in categories %}

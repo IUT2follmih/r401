@@ -2,7 +2,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 	<a class="navbar-brand" href="{{ path("app_default_index") }}">
 		<i class="fas fa-home"></i>
-		Accueil Boutique
+		{%trans%}
+		templates.navbar.home
+		{% endtrans %}
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -12,19 +14,23 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{{ path("app_boutique") }}">
 					<i class="fas fa-store"></i>
-					Boutique
+					{% trans %}
+					templates.navbar.store
+					{% endtrans %}
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="{{ path("app_default_contact") }}">
 					<i class="fas fa-comments"></i>
-					Contact
+					{% trans %}
+					templates.navbar.contact
+					{% endtrans %}
 				</a>
 			</li>
 			{# TODO : ajouter au fil des TPs les autres éléments du menu #}
 		</ul>
 		<!-- Début champ de recherche -->
-		{# TODO #}
+	{# TODO #}
 		<!-- Fin champ de recherche -->
 		<!-- Début menu des monnaies -->
 		{# TODO #}

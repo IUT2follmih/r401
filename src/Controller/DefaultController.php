@@ -10,8 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     #[Route(
-        path: '/',
+        path: '/{_locale}',
         name: 'app_default_index',
+        requirements: ['_locale' => '%app.supported_locales%'],
+        defaults: ['_locale' => 'fr']
     )]
     public function index(): Response
     {
@@ -19,8 +21,9 @@ class DefaultController extends AbstractController
     }
 
     #[Route(
-        path: '/contact',
+        path: '/{_locale}/contact',
         name: 'app_default_contact',
+        requirements: ['_locale' => '%app.supported_locales%'],
     )]
     public function contact(): Response
     {

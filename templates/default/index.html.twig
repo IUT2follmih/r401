@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Accueil
+{% trans %}
+default.index.title
+{% endtrans %}
 {% endblock %}
 
 {% block body %}
@@ -9,7 +11,10 @@
 		<div class="card-header">
 			<h3>
 				<i class="fas fa-home"></i>
-				 Boutique R4.01
+				{% trans %}
+				default.index.title
+				{% endtrans %}
+				 <!--Boutique R4.01 -->
 			</h3>
 		</div>
 		<div class="card-body">
@@ -17,7 +22,12 @@
 				<img src="{{asset("images/epicerie.jpg")}}" class="card-img-top" alt="Logo Boutique"/>
 				<div class="card-body">
 					<p class="card-text">
-						<i>Ici rien à vendre, c'est juste pour apprendre...</i>
+						<i>
+						{% trans %}
+						default.index.nts
+						{% endtrans %}
+						{# Ici rien à vendre, c'est juste pour apprendre... #}
+						</i>
 					</p>
 				</div>
 			</div>

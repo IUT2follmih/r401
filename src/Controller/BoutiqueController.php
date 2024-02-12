@@ -10,8 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class BoutiqueController extends AbstractController
 {
     #[Route(
-        path: '/boutique',
-        name: 'app_boutique'
+        path: '/{_locale}/boutique',
+        name: 'app_boutique',
+        requirements: ['_locale' => '%app.supported_locales%'],
+        defaults: ['_locale' => 'fr']
     )]
 
     public function index(BoutiqueService $boutique): Response
@@ -22,8 +24,10 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route(
-        path: '/rayon/{idCategorie}',
-        name: 'app_boutique_rayon'
+        path: '{_locale}/rayon/{idCategorie}',
+        name: 'app_boutique_rayon',
+        requirements: ['_locale' => '%app.supported_locales%'],
+
     )]
     public function rayon(BoutiqueService $boutique, int $idCategorie)
     {

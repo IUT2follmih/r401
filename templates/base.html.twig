@@ -48,7 +48,12 @@
 				// Activation tooltip bootstrap sur la page
 				$('[data-toggle="tooltip"]').tooltip();
 				// Script du bouton de recherche
-				// TODO
+				$('#btn-search').click(function () {
+					console.log('click');
+					var searchString = $('#searchString').val().trim();
+					location = ('{{path('app_boutique_recherche')}}' + '/' + encodeURIComponent(searchString));
+					return false;
+				});
 			});
 		</script>
 		<!-- debut du block js spécifique -->

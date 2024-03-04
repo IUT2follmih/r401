@@ -1,48 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{% trans %}
-	boutique.rayon.header
-	{% endtrans %}
-	{{ categorie.libelle }}
+	{{ 'default.rayon.title' | trans }}
 {% endblock %}
 
 {% block body %}
-	<div class="card col-md-12">
-		<div class="card-header">
-			<h3>
-				<i class="fas fa-store"></i>
-				{% trans %}
-				boutique.rayon.shelfName
-				{% endtrans %}
-				"{{categorie.libelle}}" :
-				{{items|length}}
-				{% trans %}
-				boutique.rayon.shelfTitle
-				{% endtrans %}
-			</h3>
-		</div>
 
-		<div class="card-body row">
-			{% for item in items %}
-				<div class="col-md-3">
-					<div class="card clickable" onclick="location = '{{ path('app_boutique_rayon', {'idCategorie':categorie.id}) }}'">
-						<img src="{{ asset(item.visuel) }}" class="card-img-top" alt="Logo Boutique"/>
-						<div class="card-body">
-							<h2>{{ item.libelle }}</h2>
-							<p class="card-text">
-								{{ item.texte }}
-							</p>
-							<h2>
-								<span class="badge badge-primary">
-									<i class="fas fa-cart-plus">{{item.prix}}
-										€
-									</i>
-								</span>
-							</h2>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-	{% endblock %}
+    <div class="card col-md-12">
+        <div class="card-header">
+            <h3>
+                <i class="fas fa-store"></i>
+                {{ 'boutique.rayon.rayon' | trans }} <b>{{categorie.libelle}}</b> : <span class="badge badge-pill badge-info">{{produits|length}}</span> {{ 'boutique.rayon.produit' | trans }}(s)
+            </h3>
+        </div>
+        <div class="card-body row">
+            {% for item in produits %}
+                <div class="col-md-4">
+                    <div class="card clickable" onclick="location = '{{ path('app_panier_ajouter', {'idProduit': item.id, 'quantite':1})}}'">
+                        <img src="{{ asset(item.visuel)}}" class="card-img-top" alt="Logo categorie"/>
+                        <div class="card-body">
+                            <h2>{{item.libelle}}</h2>
+                            <p class="card-text">
+                                <i>{{item.texte}}</i>
+                            </p>
+                            <h2><span class="badge badge-primary">
+                                <i class="fas fa-cart-plus">{{item.prix}} €
+                                </i>
+                            </span></h2>
+                        </div>
+                    </div>
+                </div>
+                
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

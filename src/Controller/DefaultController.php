@@ -13,13 +13,14 @@ class DefaultController extends AbstractController
         path: '/{_locale}',
         name: 'app_default_index',
         requirements: ['_locale' => '%app.supported_locales%'],
-        defaults: ['_locale' => 'fr']
+        defaults: ['_locale' => 'fr'],
     )]
     public function index(): Response
     {
         return $this->render('default/index.html.twig');
     }
 
+    // TODO : route
     #[Route(
         path: '/{_locale}/contact',
         name: 'app_default_contact',
@@ -28,6 +29,5 @@ class DefaultController extends AbstractController
     public function contact(): Response
     {
         return $this->render('default/contact.html.twig');
-       
     }
 }

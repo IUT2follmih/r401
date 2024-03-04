@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-{% trans %}
-default.index.title
-{% endtrans %}
+	{{ 'default.index.title' | trans }}
 {% endblock %}
 
 {% block body %}
@@ -11,23 +9,15 @@ default.index.title
 		<div class="card-header">
 			<h3>
 				<i class="fas fa-home"></i>
-				{% trans %}
-				default.index.title
-				{% endtrans %}
-				 <!--Boutique R4.01 -->
+				 {{ 'default.index.boutique' | trans }}
 			</h3>
 		</div>
 		<div class="card-body">
-			<div class="card clickable" onclick="location = '{# TODO #}'">
-				<img src="{{asset("images/epicerie.jpg")}}" class="card-img-top" alt="Logo Boutique"/>
+			<div class="card clickable" onclick="location = '{{ path('app_boutique') }}'">
+				<img src="{{asset("images/epicerie.jpg") }}" class="card-img-top" alt="Logo Boutique"/>
 				<div class="card-body">
 					<p class="card-text">
-						<i>
-						{% trans %}
-						default.index.nts
-						{% endtrans %}
-						{# Ici rien à vendre, c'est juste pour apprendre... #}
-						</i>
+						<i>{{ 'default.index.text' | trans }}</i>
 					</p>
 				</div>
 			</div>

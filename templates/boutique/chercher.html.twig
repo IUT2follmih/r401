@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Recherche
+{% endblock %}
+
+{% block body %}
+
+<div class="card col-md-12">
+    <div class="card-header">
+        <h3>
+            <i class="fas fa-search"></i>
+            Recherche "{{recherche}}" : {{produits|length}} article(s)
+        </h3>
+    </div>
+    <div class="card-body row">
+        {% for item in produits %}
+            <div class="col-md-4">
+                 <div class="card clickable"  onclick="location = '{{ path('app_panier_ajouter', {'idProduit': item.id, 'quantite':1})}}'"> 
+                    <img src="{{ asset(item.visuel)}}" class="card-img-top" alt="Logo categorie"/>
+                    <div class="card-body">
+                        <h2>{{item.libelle}}</h2>
+                        <p class="card-text">
+                            <i>{{item.texte}}</i>
+                        </p>
+                        <h2><span class="badge badge-primary">
+                            <i class="fas fa-cart-plus">{{item.prix}} €
+                            </i>
+                        </span></h2>
+                    </div>
+                </div>
+            </div>
+        
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

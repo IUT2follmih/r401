@@ -2,36 +2,58 @@
 
 namespace App\Controller;
 
-use App\Service\PanierService;
-use PhpParser\Node\Name;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\BoutiqueService;
+use App\Service\PanierService;
+use Doctrine\ORM\Mapping\Id;
 
+#[Route('/{_locale}/panier', requirements: ['_locale' => '%app.supported_locales%'])]
 class PanierController extends AbstractController
 {
-    #[Route(
-        path: '/{_locale}/panier',
-        name: 'app_panier',
-        requirements: ['_locale' => '%app.supported_locales%'],
-        defaults: ['_locale' => 'fr']
-    )]
-    public function index(PanierService $panierService): Response
+    #[Route('/', name: 'app_panier_index')]
+    public function index(PanierService $panier): Response
     {
+        
         return $this->render('panier/index.html.twig', [
-            'panier' => $panierService->getContenu(),
+            'contenu' => $panier->getContenu(),
+            'nbProduit' => $panier->getNombreProduits(),
+            'montant' => $panier->getTotal(),
         ]);
     }
 
-    #[Route(
-        path: '/{_locale}/panier/ajouter/{idProduit}/{quantite}',
-        name: 'app_panier_ajouter',
-        requirements: ['_locale' => '%app.supported_locales%'],
-        defaults: ['_locale' => 'fr']
-    )]
-    public function ajouter(PanierService $panierService, int $idPorduit, int $quantite)
-    {
-        $panierService->ajouterProduit($idPorduit, $quantite);
+    #[Route('/ajouter/{idProduit}/{quantite}', name: 'app_panier_ajouter', requirements: ['idProduit' => '\d+','quantite' => '\d+'])]
+    public function ajouter(PanierService $panier, int $idProduit, int $quantite) : Response{
         
+        $panier->ajouterProduit($idProduit, $quantite);
+        return $this->redirectToRoute('app_panier_index');
     }
+
+    #[Route('/enlever/{idProduit}/{quantite}', name: 'app_panier_enlever', requirements: ['idProduit' => '\d+','quantite' => '\d+'])]
+    public function enlever(PanierService $panier, $idProduit, $quantite) : Response{
+
+        $panier->enleverProduit($idProduit, $quantite);
+        return $this->redirectToRoute('app_panier_index');
+    }
+
+    #[Route('/supprimer/{idProduit}', name: 'app_panier_supprimer', requirements: ['idProduit' => '\d+'])]
+    public function supprimer(PanierService $panier, $idProduit) : Response{
+
+        $panier->supprimerProduit($idProduit);
+        return $this->redirectToRoute('app_panier_index');
+    }
+
+    #[Route('/vider', name: 'app_panier_vider')]
+    public function vider(PanierService $panier, ) : Response{
+
+        $panier->vider();
+        return $this->redirectToRoute('app_panier_index');
+    }
+
+    public function nombreProduits(PanierService $panier) : Response
+    {
+        return new Response($panier->getNombreProduits());
+    }
+
 }

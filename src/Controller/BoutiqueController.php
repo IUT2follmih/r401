@@ -45,7 +45,7 @@ class BoutiqueController extends AbstractController
 
         return $this->render('boutique/chercher.html.twig', [
             'recherche' => $recherche,
-            'produits' => $doctrine->getRepository(Produit::class)->find($recherche),
+            'produits' => $doctrine->getRepository(Produit::class)->search($recherche),
         ]);
     }
 }

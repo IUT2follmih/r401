@@ -21,9 +21,14 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
-    public function __search($req)
+    public function search($req)
     {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT p FROM App\Entity\Produit p WHERE p.libelle LIKE :reql or p.texte LIKE :reql'
+        )->setParameter('reql', '%'.$req.'%');
 
+        return $query->getResult();
     }
 
 //    /**

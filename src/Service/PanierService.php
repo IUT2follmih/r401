@@ -2,7 +2,9 @@
 namespace App\Service;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use App\Service\BoutiqueService;
+use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Produit;
+use App\Entity\Categorie;
 
 // Service pour manipuler le panier et le stocker en session
 class PanierService
@@ -15,10 +17,10 @@ class PanierService
     const PANIER_SESSION = 'panier'; // Le nom de la variable de session pour faire persister $this->panier
 
     // Constructeur du service
-    public function __construct(RequestStack $requestStack, BoutiqueService $boutique)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $doctrine)
     {
-        // Récupération des services session et BoutiqueService
-        $this->boutique = $boutique;
+        // Récupération des services session et 
+        $this->boutique = $doctrine;
         $this->session = $requestStack->getSession();
         // Récupération du panier en session s'il existe, init. à vide sinon
         $this->panier = $this->session->get(self::PANIER_SESSION, []);
@@ -29,8 +31,8 @@ class PanierService
     {
       $total = 0;
       foreach($this->panier as $idProduit => $quantite){
-        $produit = $this->boutique->findProduitById($idProduit);
-        $total += $produit->prix * $quantite;
+        $produit = $this->boutique->getRepository(Produit::class)->find($idProduit);
+        $total += $produit->getPrix() * $quantite;
       }
       return $total;
     }
@@ -94,7 +96,7 @@ class PanierService
     {
       $res = [];
       foreach($this->panier as $idProduit => $quantite){
-        $produit = $this->boutique->findProduitById($idProduit);
+        $produit = $this->boutique->getRepository(Produit::class)->find($idProduit);
         $res[] = ["produit" => $produit, "quantite" => $quantite];
       }
       return $res;

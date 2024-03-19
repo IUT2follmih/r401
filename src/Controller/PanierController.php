@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\PanierService;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Usager;
+
 
 #[Route('/{_locale}/panier', requirements: ['_locale' => '%app.supported_locales%'])]
 class PanierController extends AbstractController
@@ -55,4 +58,16 @@ class PanierController extends AbstractController
         return new Response($panier->getNombreProduits());
     }
 
+
+    #[Route('/commander', name: 'app_panier_commander')]
+    public function commander(PanierService $panier, ManagerRegistry $doctrine) : Response{
+        $usager = $doctrine->getRepository(Usager::class)->findById('1');
+        $commande = $panier->panierToCommande($usager, $doctrine);
+        return $this->render('panier/commande.html.twig', [
+            'prenom' => $usager->getPrenom(),
+            'nom' => $usager->getNom(),
+            'commandeId' => $commande->getId(),
+            'dateCommande' => $commande->getDateCreation()
+        ]);
+    }
 }

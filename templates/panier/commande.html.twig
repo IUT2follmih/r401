@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+
+<div class="card col-md-12">
+    <div class="card-header">
+        <h3>
+        <i class="fas fa-truck-fast">
+            <span class="fas fa-user">{{ nom + prenom }}</span>
+            <span class="fas fa-shopping-cart">{{ commandeId }} commander le {{ dateCommande }}</span>
+        </h3>
+    </div>
+</div>
+
+{% endblock %}

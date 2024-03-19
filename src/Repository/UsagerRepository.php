@@ -40,6 +40,13 @@ class UsagerRepository extends ServiceEntityRepository implements PasswordUpgrad
         $this->getEntityManager()->flush();
     }
 
+    public function findById($id): ?Usager{
+        return $this->createQuerybuilder('usager')
+        ->andWhere('usager.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getOneOrNullResult();
+    }
 //    /**
 //     * @return Usager[] Returns an array of Usager objects
 //     */

@@ -5,6 +5,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Produit;
 use App\Entity\Categorie;
+use App\Entity\Commande;
+use App\Entity\Usager;
+use App\Entity\LigneCommande;
 
 // Service pour manipuler le panier et le stocker en session
 class PanierService
@@ -103,7 +106,21 @@ class PanierService
     }
 
     private function refreshSession(){
-        $this->session->set(self::PANIER_SESSION, $this->panier);
+      $this->session->set(self::PANIER_SESSION, $this->panier);
     }
 
+
+    public function panierToCommande(Usager $usager, ManagerRegistry $doctrine) : ?Commande{
+      $commande = new Commande();
+      foreach($this->getContenu() as $produit => $quantite){
+        $ligne = new LigneCommande();
+        $ligne->setProduit($doctrine->getRepository(Produit::class)->find($produit));
+        $ligne->setQuantite($quantite['quantite']);
+        $commande->addLigneCommande($ligne);
+      }
+
+      $usager->addCommande($commande);
+      $this->vider();
+      return $commande;
+    }
 }

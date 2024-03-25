@@ -15,6 +15,10 @@
             produit(s) - montant : 
             <b>{{ montant }} €</b>
         </h3>
+
+        <div class="col-md-6 align-self-center btn-group" role="group">
+            <a class="btn btn-primary" href="{{path("app_panier_commander")}}">Passer la commande<a/>
+        </div>
     </div>
      <div class="card-body">
         {% if contenu is empty %}

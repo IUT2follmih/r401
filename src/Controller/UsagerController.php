@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UsagerController extends AbstractController
 {
@@ -23,7 +24,7 @@ class UsagerController extends AbstractController
     }
 
     #[Route('/{_locale}/usager/new', name: 'app_usager_new', requirements: ['_locale' => '%app.supported_locales%'],)]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $usager = new Usager();
         $form = $this->createForm(UsagerType::class, $usager);
@@ -31,12 +32,13 @@ class UsagerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($usager);
-            $entityManager->flush();
             $hashedPassword = $passwordHasher->hashPassword($usager, $usager->getPassword());
             $usager->setPassword($hashedPassword);
             $usager->setRoles(["ROLE_CLIENT"]);
 
-            return $this->redirectToRoute('app_usager_index', [], Response::HTTP_SEE_OTHER);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_usager', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('usager/new.html.twig', [

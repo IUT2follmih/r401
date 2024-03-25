@@ -67,7 +67,7 @@ class PanierController extends AbstractController
             'prenom' => $usager->getPrenom(),
             'nom' => $usager->getNom(),
             'commandeId' => $commande->getId(),
-            'dateCommande' => $commande->getDateCreation()
+            'dateCommande' => $commande->getDateCreation()->format("d-m-Y H::i:s")
         ]);
     }
 }

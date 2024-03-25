@@ -8,6 +8,7 @@ use App\Entity\Categorie;
 use App\Entity\Commande;
 use App\Entity\Usager;
 use App\Entity\LigneCommande;
+use DateTime;
 
 // Service pour manipuler le panier et le stocker en session
 class PanierService
@@ -112,15 +113,24 @@ class PanierService
 
     public function panierToCommande(Usager $usager, ManagerRegistry $doctrine) : ?Commande{
       $commande = new Commande();
+      $em = $doctrine->getManager();
       foreach($this->getContenu() as $produit => $quantite){
         $ligne = new LigneCommande();
         $ligne->setProduit($doctrine->getRepository(Produit::class)->find($produit));
         $ligne->setQuantite($quantite['quantite']);
+        $em->persist($ligne);
+        $em->flush();
         $commande->addLigneCommande($ligne);
       }
 
+      $dateTime = new DateTime();
+      $commande->setDateCreation($dateTime);
+      $commande->setValidation(true);
+      $em->persist($commande);
       $usager->addCommande($commande);
       $this->vider();
+      $em->flush();
+
       return $commande;
     }
 }

@@ -118,6 +118,7 @@ class PanierService
         $ligne = new LigneCommande();
         $ligne->setProduit($doctrine->getRepository(Produit::class)->find($produit));
         $ligne->setQuantite($quantite['quantite']);
+        $ligne->setPrix($quantite['produit']->getPrix());
         $em->persist($ligne);
         $em->flush();
         $commande->addLigneCommande($ligne);
